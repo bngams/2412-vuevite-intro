@@ -5,12 +5,12 @@
 
 <template>
   <v-app>
-    <v-app-bar :elevation="2"> 
-      <v-app-bar-title>Application Bar</v-app-bar-title>
-    </v-app-bar>
-    <div class="page-container">
-      <Welcome></Welcome>
-    </div>
+    <Header></Header>
+    <v-main>
+      <v-container>
+        <Welcome></Welcome>
+      </v-container>
+    </v-main>
   </v-app>
 </template>
 
