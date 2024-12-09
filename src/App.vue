@@ -8,7 +8,7 @@
     <Header></Header>
     <v-main>
       <v-container>
-        <Welcome></Welcome>
+        <RouterView />
       </v-container>
     </v-main>
   </v-app>
