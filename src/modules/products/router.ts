@@ -15,5 +15,11 @@ export default [
         //   name: 'ProductDetail'
         // }
       ]
+    },
+    // TODO: handle children routes dirctly on products
+    {
+      path: '/details/:id',
+      component: () => import('./pages/ProductDetails.vue'), // Lazy-loaded
+      name: 'ProductDetail'
     }
 ];
