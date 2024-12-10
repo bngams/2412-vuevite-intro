@@ -2,29 +2,26 @@
 import { onMounted, ref, watch } from 'vue';
 import ProductList from '../components/ProductList.vue';
 import { VProgressLinear } from 'vuetify/components';
+import { ProductService } from '../services/product-service';
+import { Products } from '../models/product';
 
-const isLoading = ref(true);
 const itemsPerPage = 10;
 const currentPage = ref(1);
-
-// Reactive state for products and error
-const products = ref([]);
+const products = ref<Products>([]);
+const isLoading = ref(true);
 const error = ref<string | null>(null);
+
+const productService = new ProductService();
 
 async function fetchProducts() {
   isLoading.value = true;
   error.value = null; // Clear previous error state
   try {
-    const response = await fetch(
-      `https://dummyjson.com/products?limit=${itemsPerPage}&skip=${
-        (currentPage.value - 1) * itemsPerPage
-      }`
-    );
-    if (!response.ok) {
-      throw new Error(`Error: ${response.status} ${response.statusText}`);
-    }
-    const data = await response.json();
-    products.value = data.products;
+    const params = { 
+     limit: itemsPerPage,
+     skip: (currentPage.value - 1) * itemsPerPage 
+    };
+    products.value = await productService.getAll(params, 'products');
   } catch (err) {
     console.error('Error while fetching products:', err);
     error.value = (err as Error).message || 'An unexpected error occurred.';
