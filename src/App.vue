@@ -1,6 +1,5 @@
 <script setup lang="ts">
   import Header from './components/layout/Header.vue';
-  import Welcome from './pages/Welcome.vue'
 </script>
 
 <template>

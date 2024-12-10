@@ -8,7 +8,7 @@
     <v-app-bar-title>ACME</v-app-bar-title>
     
     <!-- Navigation Links in the center -->
-    <div class="nav-links">
+    <div>
         <v-btn variant="text" to="/">Home</v-btn>
         <v-btn variant="text" to="/about">About</v-btn>
         <v-btn variant="text" to="/products">Products</v-btn>
