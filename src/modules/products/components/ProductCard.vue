@@ -47,7 +47,7 @@ const isDetailedMode = computed(() => props.mode === 'details');
     <v-card-actions>
       <v-btn color="primary" @click="handleAddToCart">Add to Cart</v-btn>
       <!-- Show "Details" button only when not in detailed mode -->
-      <v-btn v-if="!isDetailedMode" variant="text" color="secondary" :to="'/details/' + product.id">
+      <v-btn v-if="!isDetailedMode" variant="text" color="secondary" :to="'/products/details/' + product.id">
         Details
       </v-btn>
     </v-card-actions>
