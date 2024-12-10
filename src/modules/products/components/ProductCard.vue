@@ -43,7 +43,7 @@
     </v-card-text>
     <v-card-actions>
       <v-btn color="primary" @click="addToCart">Add to Cart</v-btn>
-      <v-btn v-if="mode != 'details'" variant="text" color="secondary" :to="'/products/details/'+product.id">Details</v-btn>
+      <v-btn v-if="mode != 'details'" variant="text" color="secondary" :to="'/details/'+product.id">Details</v-btn>
     </v-card-actions>
   </v-card>
 </template>
