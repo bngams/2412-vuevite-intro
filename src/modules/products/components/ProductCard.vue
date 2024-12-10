@@ -1,31 +1,33 @@
 <script setup lang="ts">
-    import { PropType } from 'vue';
-    import { Product }  from '../models/product';
+import { PropType, computed, inject } from 'vue';
+import { Product } from '../models/product';
 
-    const props = defineProps({
-        product: {
-            type: Object as PropType<Product>,
-            required: true
-        },
-        mode: {
-          type: String,
-          required: false,
-          default: 'card'
-        } 
-    });
+const props = defineProps({
+  product: {
+    type: Object as PropType<Product>,
+    required: true,
+  },
+  mode: {
+    type: String,
+    required: false,
+    default: 'card', // Possible values: 'card', 'details'
+  },
+});
 
-    const addToCart = () => {
-      console.log("Add to cart clicked");
-    };
+// Inject handleAddToCart function
+const addToCart = inject('addToCart') as (product: Product) => void;
+const handleAddToCart = () => {
+  if (addToCart) {
+    addToCart(props.product);
+  }
+};
 
-    // TODO: create a property isDetailedMode or others
-    // to avoid comparison in template mode == 'details'
-
+// Computed property to determine if the card is in detailed mode
+const isDetailedMode = computed(() => props.mode === 'details');
 </script>
 
 <template>
-
-  <v-card class="mx-auto" :max-width="mode == 'details' ? '80%': '300px'">
+  <v-card class="mx-auto" :max-width="isDetailedMode ? '80%' : '300px'">
     <v-img
       :src="product.thumbnail"
       alt="Product Image"
@@ -38,12 +40,16 @@
       {{ product.category }}
     </v-card-subtitle>
     <v-card-text>
-      <p v-if="mode == 'details'">{{ product.description }}</p>
+      <!-- Show description only in detailed mode -->
+      <p v-if="isDetailedMode">{{ product.description }}</p>
       <p class="font-weight-bold">Price: ${{ product.price }}</p>
     </v-card-text>
     <v-card-actions>
-      <v-btn color="primary" @click="addToCart">Add to Cart</v-btn>
-      <v-btn v-if="mode != 'details'" variant="text" color="secondary" :to="'/details/'+product.id">Details</v-btn>
+      <v-btn color="primary" @click="handleAddToCart">Add to Cart</v-btn>
+      <!-- Show "Details" button only when not in detailed mode -->
+      <v-btn v-if="!isDetailedMode" variant="text" color="secondary" :to="'/details/' + product.id">
+        Details
+      </v-btn>
     </v-card-actions>
   </v-card>
 </template>
