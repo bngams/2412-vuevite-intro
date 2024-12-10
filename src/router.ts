@@ -27,8 +27,8 @@ router.beforeEach((to, from) => {
   if(to.meta?.authRequired){
     // is user logged in ? 
     // redirect to login page
-    alert('Not authorized');
-    return false;
+    // alert('Not authorized');
+    return true;
   } 
   return true;
 })
