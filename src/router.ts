@@ -3,6 +3,7 @@ import Welcome from './pages/Welcome.vue';
 import NotFound from './pages/NotFound.vue';
 import ProductRoutes from './modules/products/router';
 import AuthRoutes from './modules/auth/router';
+import { useAuthStore } from './modules/auth/stores/auth-store';
 
 // Define the routes (we'll connect these to nav items later)
 const routes: RouteRecordRaw[] = [
@@ -37,9 +38,13 @@ const router = createRouter({
 router.beforeEach((to, from) => {
   if(to.meta?.authRequired){
     // is user logged in ? 
-    // redirect to login page
-    // alert('Not authorized');
-    return true;
+    const authStore = useAuthStore();
+    if(authStore.isLoggedIn) {
+      return true;
+    } else {
+      // redirect to login page
+      return false;
+    }
   } 
   return true;
 })

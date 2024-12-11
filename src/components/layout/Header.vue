@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { inject } from 'vue';
+import { useAuthStore } from '../../modules/auth/stores/auth-store';
 
+const authStore = useAuthStore();
 const totalItems = inject('totalItems') as () => number;
 </script>
 
@@ -22,7 +24,7 @@ const totalItems = inject('totalItems') as () => number;
         overlap
       ></v-badge>
     </v-btn>
-    <v-btn variant="text" to="/auth/login">Login</v-btn>
-    <v-btn variant="text" to="/logout">Logout</v-btn>
+    <v-btn v-if="!authStore.isLoggedIn" variant="text" to="/auth/login">Login</v-btn>
+    <v-btn v-else variant="text" @clicl="authStore.logout()">Logout</v-btn>
   </v-app-bar>
 </template>
