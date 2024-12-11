@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { reactive, provide } from 'vue';
+import { reactive, provide, computed } from 'vue';
 
 const cartState = reactive({
   items: [] as { productId: number; quantity: number }[],
@@ -18,6 +18,7 @@ const removeFromCart = (productId: number) => {
   cartState.items = cartState.items.filter((item) => item.productId !== productId);
 };
 
+// TODO: transform as computed 
 const totalItems = () => cartState.items.reduce((acc, item) => acc + item.quantity, 0);
 
 // Provide the cart state and actions

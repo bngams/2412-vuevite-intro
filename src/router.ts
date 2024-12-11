@@ -2,6 +2,7 @@ import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 import Welcome from './pages/Welcome.vue';
 import NotFound from './pages/NotFound.vue';
 import ProductRoutes from './modules/products/router';
+import AuthRoutes from './modules/auth/router';
 
 // Define the routes (we'll connect these to nav items later)
 const routes: RouteRecordRaw[] = [
@@ -9,6 +10,7 @@ const routes: RouteRecordRaw[] = [
   { path: '/home', name: 'Home', component: Welcome },
   { path: '/about', name: 'About', meta: { preload: true }, component: () => import('./pages/About.vue') },
   ...ProductRoutes,
+  ...AuthRoutes,
   {
     path: '/:pathMatch(.*)*', // Catch-all for undefined routes /\!
     name: 'NotFound',

@@ -22,7 +22,7 @@ const totalItems = inject('totalItems') as () => number;
         overlap
       ></v-badge>
     </v-btn>
-    <v-btn variant="text" to="/login">Login</v-btn>
+    <v-btn variant="text" to="/auth/login">Login</v-btn>
     <v-btn variant="text" to="/logout">Logout</v-btn>
   </v-app-bar>
 </template>
