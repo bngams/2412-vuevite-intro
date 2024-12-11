@@ -2,7 +2,6 @@ export default [
     {
       path: '/auth',
       component: () => import('./Auth.vue'), // Lazy-loaded
-      meta: { authRequired: true }, 
       children: [
         {
           path: 'login',
