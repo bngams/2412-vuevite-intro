@@ -25,6 +25,6 @@ const totalItems = inject('totalItems') as () => number;
       ></v-badge>
     </v-btn>
     <v-btn v-if="!authStore.isLoggedIn" variant="text" to="/auth/login">Login</v-btn>
-    <v-btn v-else variant="text" @clicl="authStore.logout()">Logout</v-btn>
+    <v-btn v-else variant="text" @click="authStore.logout">Logout</v-btn>
   </v-app-bar>
 </template>
