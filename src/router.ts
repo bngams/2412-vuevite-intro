@@ -7,7 +7,7 @@ import ProductRoutes from './modules/products/router';
 const routes: RouteRecordRaw[] = [
   { path: '/', redirect: '/home' }, // Default redirect to /home
   { path: '/home', name: 'Home', component: Welcome },
-  { path: '/about', name: 'About', component: () => import('./pages/About.vue') },
+  { path: '/about', name: 'About', meta: { preload: true }, component: () => import('./pages/About.vue') },
   ...ProductRoutes,
   {
     path: '/:pathMatch(.*)*', // Catch-all for undefined routes /\!
@@ -21,6 +21,15 @@ const router = createRouter({
   history: createWebHistory(),
   routes,
 });
+
+// TODO: Preload strategy => load some part when app starts (on App.vue)
+// export function preloadRoutes() { 
+// routes.forEach(route => {
+//  if(route.meta?.preload) {
+//   route.component()
+//  } 
+// })
+// }
 
 // Guards
 router.beforeEach((to, from) => {
