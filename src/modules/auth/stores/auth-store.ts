@@ -5,6 +5,10 @@ function storeUser(user: any){
     window.localStorage.setItem('user', JSON.stringify(user))
 } 
 
+function removeUser(){
+    window.localStorage.removeItem('user')
+} 
+
 function getUser(){
     const user = window.localStorage.getItem('user');
     if(user) {
@@ -32,9 +36,12 @@ export const useAuthStore = defineStore('auth', {
             const fakeToken = '12345azerty';
             this.user = { email: 'boris@mail.com', token: fakeToken };
             storeUser(this.user);
+            this.router.push({ name: 'Catalog'});
         },
         logout() {
             this.user = null;
+            removeUser();
+            this.router.push({ name: 'Login'});
         } 
     } 
 })
